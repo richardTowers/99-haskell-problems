@@ -1,1 +1,23 @@
-sayHello x = putStrLn ("Hello, " ++ x ++ "!")
+
+myLast [] = error ""
+myLast [x] = x
+myLast (x:xs) = myLast xs
+
+mySecondLast [] = error ""
+mySecondLast [x] = error ""
+mySecondLast [x,_] = x
+mySecondLast (x:xs) = mySecondLast xs
+
+elementAt [] i = error ""
+elementAt (x:_) 0 = x
+elementAt (_:xs) i = elementAt xs (i - 1)
+
+myLength [] = 0
+myLength x = myLengthHelper x 0
+
+myLengthHelper [] i = i
+myLengthHelper (_:xs) i = myLengthHelper xs (i + 1)
+
+one _ = 1
+oneList = map one
+myLength' xs = foldl (+) (0) (oneList xs)
