@@ -21,3 +21,13 @@ myLengthHelper (_:xs) i = myLengthHelper xs (i + 1)
 one _ = 1
 oneList = map one
 myLength' xs = foldl (+) (0) (oneList xs)
+
+myReverseHelper :: [t] -> [t] -> [t]
+myReverseHelper [] y = y
+myReverseHelper [x] y = x:y
+myReverseHelper (x:xs) y = myReverseHelper xs (x:y)
+
+myReverse x = myReverseHelper x []
+
+isPalindrome :: (Eq t) => [t] -> Bool
+isPalindrome x = x == myReverse x
