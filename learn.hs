@@ -32,7 +32,6 @@ myReverse x = myReverseHelper x []
 isPalindrome :: (Eq t) => [t] -> Bool
 isPalindrome x = x == myReverse x
 
--- TODO:this reverse is super gross!
 data NestedList a = Elem a | List [NestedList a]
 
 flatten :: NestedList a -> [a]
@@ -40,8 +39,7 @@ flatten (Elem x) = [x]
 flatten (List x) = concatMap flatten x
 
 compress :: Eq a => [a] -> [a]
-compress xs =
-    reverse $ foldl compress' [] xs
+compress = foldr compress' []
     where
-        compress' [] x = [x]
-        compress' acc item = if item == head acc then item:tail acc else item:acc
+        compress' x [] = [x]
+        compress' item acc = if item == head acc then item:tail acc else item:acc
