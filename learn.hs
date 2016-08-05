@@ -31,3 +31,11 @@ myReverse x = myReverseHelper x []
 
 isPalindrome :: (Eq t) => [t] -> Bool
 isPalindrome x = x == myReverse x
+
+-- TODO:this reverse is super gross!
+compress :: Eq a => [a] -> [a]
+compress xs =
+    reverse $ foldl compress' [] xs
+    where
+        compress' [] x = [x]
+        compress' acc item = if item == head acc then item:tail acc else item:acc
